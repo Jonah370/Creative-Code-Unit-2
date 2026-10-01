@@ -1,0 +1,295 @@
+# L5 Reference
+
+> Processing is not a single programming language, but an arts-centric system for learning, teaching, and making visual form with code. --[Processing.py reference](https://py.processing.org/reference/)
+
+## STRUCTURE
+
+* [X] {} (curly braces - defines a table for arrays, classes, objects, dictionaries, data and more)
+* [X] [] (access items from an ordered table aka "array")
+* [X] -- (comment)
+* [X] --[[ (multi-line comment) ]]--
+* [X] = (assign global variable)
+* [X] local (assign local variable)
+* [X] ==
+* [X] nil
+* [X] true
+* [X] false
+* [X] setup()
+* [X] draw()
+* [X] for i=1,5 do end
+* [X] loop
+* [X] noLoop()
+* [X] isLooping() -- equals true or false
+* [X] exit() (quits/stops/exits the program)
+* [X] redraw() (executes draw one time)
+* [X] windowTitle() 
+* [X] function (used to define a new user-defined function)
+
+## Control
+
+### Conditionals
+
+* [X] break (finish a loop that contains it)
+* [X] if
+* [X] then
+* [X] end
+* [X] elseif
+
+### Relational Operators
+
+* [X] == (equality)
+* [X] ~= (inequality)
+
+### Iteration
+
+* [X] for (runs a set number of times)
+* [X] while do (runs while true, checks before executing)
+* [X] repeat until (loops but checks condition at end. executes at least once)
+
+### Logical Operators
+
+* [X] and 
+* [X] or 
+* [X] not 
+
+## Environment
+* [X] size()
+* [X] print()
+* [X] deltaTime
+* [X] describe() --implementing as text to console, takes string input, should be in setup
+* [X] displayDensity()
+* [ ] ~pixelDensity()~ 
+* [X] displayHeight 
+* [X] displayWidth 
+* [X] focused --boolean var
+* [X] frameCount
+* [X] frameRate()
+* [X] fullscreen() --returns true if in fullscreen, false otherwise. if passed true, turns on fullscreen, or turns off if passed false. equivalent to p5.js implementation
+* [X] width -- width of canvas in pixels
+* [X] height -- height of canvas in pixels
+* [X] resizeWindow() -- changes width and height of window
+* [X] windowResized() -- function that runs when window is resized
+
+## I/O
+
+### Input
+* [ ] loadJSON() --Not included currently. A simple parser could be written, or a robust library used.
+* [X] loadStrings() --takes filename as arg, returns table
+* [X] loadTable() --takes 1 or 2 arguments: filename, optional "header" string if header in csv or tsv present. Detects suffix (csv, tsv or lua) and processes accordingly. Saves to a table.
+* [ ] loadXML() --Not included currently.
+
+### Output
+* [ ] saveJSON() --Not included currently.
+* [X] saveStrings() --takes table and output filename as arguments
+* [X] saveTable() --takes table and filename as arguments, and optional format "csv","tsv" or "lua". Auto-selects output based on filename suffix if third argument empty.
+
+### Time and Date
+* [X] millis() - returns time since start of program in milliseconds
+* [X] day() - returns day 1 - 31
+* [X] month() - returns month 1 - 12
+* [X] year() - returns year YYYY
+* [X] hour() - returns hour 0 - 23
+* [X] minute() - returns minute 0-59
+* [X] second() - returns seconds 0-59
+
+## Events
+
+### Keyboard
+
+* [X] key
+* [ ] keyCode --not needed as key can detect all
+* [X] keyIsDown() --not in Processing
+* [X] keyIsPressed --boolean, called keyPressed in Processing
+* [X] keyPressed()
+* [X] keyReleased()
+* [X] keyTyped()
+
+### Mouse
+
+* [X] mouseButton --A variable that returns which mouse button was last pressed: LEFT, RIGHT or CENTER
+* [X] mouseClicked() --called once after a mouse button pressed and released
+* [X] mouseDragged() -- called while mouse moves and a mouse button is pressed
+* [X] mouseIsPressed --boolean, called mousePressed in Processing
+* [X] mouseMoved() --called when mouse moved, no button pressed
+* [X] mousePressed() --called once after mouse button pressed
+* [X] mouseReleased() --called once when a mouse button released
+* [X] mouseWheel() --runs once while wheel is moving if passed x,y then can return change of -1 or 1 for x (left or right), -1 or 1 for y (up or down)
+* [X] mouseX --horizontal coordinate of mouse
+* [X] mouseY --vertical coordinate of mouse
+* [X] movedX --mouseX-pmouseX, not in Processing
+* [X] movedY --mouseY-pmouseY, not in Processing
+* [X] pmouseX --mouseX in previous frame
+* [X] pmouseY --mouseY in previous frame
+
+### Touch -- Not under development. Could be added later if interest.
+
+## SHAPE
+
+### 2D Primitives
+
+* [X] arc()
+* [X] circle()
+* [X] ellipse()
+* [X] line()
+* [X] point()
+* [X] rect()
+* [X] square()
+* [X] triangle()
+
+### Attributes
+
+* [X] ellipseMode()
+* [X] rectMode()
+* [X] strokeWeight()
+* [X] noSmooth()
+* [X] smooth()
+* [X] strokeJoin() --MITER, BEVEL, NONE. No ROUND. MITER is default. Also affected by strokeCap (because of Love2d's internals)
+
+### Curves
+* [X] curve()
+
+### Vertex
+* [ ] beginContour()
+* [X] beginShape() -- resets table of vertices for a custom shape
+* [X] bezier()
+* [ ] curveVertex()
+* [ ] endContour()
+* [X] endShape() -- draws a polygon with the table of vertices for a custom shape
+* [ ] quadraticVertex()
+* [X] texture() -- draw texture mesh to polygon
+* [X] textureMode() -- change coodinate system for uv coordinates of drawing textures. default is IMAGE mode, or NORMAL (0-1) mode.
+* [X] textureWrap() -- define if textures CLAMP or REPEAT on texture mesh. default: CLAMP
+* [X] vertex() -- adds a x,y pair to table of vertices for a custom shape, or x, y, u, v for wrapping texture
+
+### Creating & Reading
+* [X] alpha() (gets alpha aka 4th value of a color)
+* [X] blue() (gets blue aka 3rd value of a color)
+* [X] red() (gets red value of a color)
+* [ ] brightness() (extracts HSB brightness value of a color)
+* [X] color() (creates a color object) --G, G,A R,G,B  R,G,B,A or html color name. affected by colormode.
+* [X] green() (gets the green value of a color)
+* [ ] hue() (gets the hue value of a color)
+* [ ] lerpColor()
+* [ ] lightness()
+* [ ] paletteLerp()
+* [ ] saturation()
+
+### Setting
+* [X] background() --G, G,A R,G,B  R,G,B,A or html color name. affected by colorMode.
+* [X] clear()
+* [X] HSB --mode, a constant
+* [X] HSL --mode, a constant
+* [X] colorMode() --default: RGB. alternately: HSB, HSL. optional second val sets max color values.
+* [X] fill() - G, G,A R,G,B  R,G,B,A or html color name. affected by colorMode.
+* [X] noFill()
+* [X] noStroke()
+* [X] stroke() --G, G,A R,G,B  R,G,B,A or html color name. affected by colorMode.
+
+### Rendering
+
+* [ ] blendMode()
+* [X] createGraphics -- creates an offscreen buffer to draw to, with beginDraw() and endDraw() methods
+
+### Transform
+* [X] push() (saves previous drawing style settings)
+* [X] pop() (restores previous drawing style settings)
+* [X] translate()
+* [X] rotate()
+* [X] scale()
+* [X] applyMatrix()
+
+## Constants
+* [X] HALF_PI (1.57079...)
+* [X] PI (3.14159...)
+* [X] QUARTER_PI (0.78539...)
+* [X] TAU (6.28318...)
+* [X] TWO_PI (6.28318...)
+
+### Math
+* [X] random() --takes 1 or 2 arguments. if a table name is given, returns a random value from the table
+* [X] randomSeed()
+* [ ] noiseSeed()
+* [X] randomGaussian()
+* [X] noise() --1, 2 or 3 dimensional Simplex noise generation
+* [X] lerp()  
+* [X] abs()  --absolute value
+* [X] ceil()  --round up
+* [X] floor() --round down
+* [X] fract() 
+* [X] log()
+* [X] norm()
+* [X] pow()
+* [X] exp()
+* [X] sq()
+* [X] sqrt()
+* [X] round() --round up or down
+* [X] int() --convert to integer
+* [X] constrain() --limit range of variable
+* [X] map()  --remap variable from one range to another
+* [X] dist()  -- return distance in pixels between 2 sets of x,y coordinates
+* [X] max()  --return max of 2 values
+* [X] min()  --return min of 2 values
+
+## DATA
+
+* [ ] nf() --utility function for formatting numbers into strings
+* [ ] nfc() --utility function for formatting numbers into strings and placing appropriate commas to mark units of 1000 (should vary for non-US locales)
+* [ ] nfp() --utility function for formatting numbers into strings, adds pos/neg sign
+* [ ] nfs() --utility function for formatting numbers into strings, adds blank space for pos values
+
+### Conversion
+
+* [X] boolean() --convert to boolean
+* [X] byte() --convert to signed byte
+* [X] char() --convert number to letter char
+* [X] float() --convert to number
+* [X] hex() --convert to hexadecimal, with optional padding
+* [X] str() --convert number to string
+* [X] unchar() --convert char to number
+
+### Trigonometry
+* [X] angleMode()
+* [X] degrees()
+* [X] radians()
+* [X] sin()
+* [X] cos()
+* [X] tan()
+* [X] asin()
+* [X] acos()
+* [X] atan()
+* [X] atan2()
+
+## Typography
+* [X] loadFont() --create new font
+* [X] text() --display text, at x,y, optional max width for wrapping
+* [X] textFont() --change to loaded font
+* [X] textWidth() --returns width of text input
+* [X] textHeight() -- returns height of text (includes line-gap)
+* [X] textAscent() -- returns ascent, which is the distance between the baseline and the highest point on the glyph
+* [X] textDescent() -- returns descent, which is the distance between the baseline and the lowest point on the glyph
+* [ ] textMode() --not currently planning on implementing this 
+* [X] textAlign() --first parameter sets horizontal alignment LEFT (default), CENTER, or RIGHT. Optional second parameter sets TOP, CENTER or BOTTOM vertical alignment.
+* [X] textWrap()
+* [X] textSize()
+
+### Loading and Displaying
+* [X] image()
+* [X] imageMode()
+* [X] loadImage()
+* [X] noTint()
+* [X] tint()
+* [X] save()
+* [X] cursor() (see https://www.love2d.org/wiki/love.mouse.setCursor )
+* [X] noCursor()
+
+### Pixels
+
+* [X] blend() -- copies a region of pixels from one image to another
+* [X] copy() -- copies pixels from a source image to a region of the canvas
+* [X] filter() --implemented basic implementation with shaders
+* [X] PixelDensity() - get or set pixel density for normal or high pixel density displays. Default is 1.
+* [X] loadPixels() - loads current canvas into pixel array
+* [X] pixels - global variable holding pixel array of colors for each pixel on screen
+* [X] updatePixels() - draws the pixel array to screen as series of RGBA values
+* [X] get() - get value of a pixel or a region of the window
+* [X] set() - set color of a pixel or draw an image to canvas

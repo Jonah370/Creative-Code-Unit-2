@@ -1,0 +1,119 @@
+# TODO
+
+## Style
+* [ ] Add linter 
+
+## Debugging
+
+* [X] pre-alpha tests on Mac
+ * [X] correct shader differences between OSes
+* [X] Test on Windows 
+
+## Environment
+
+* [ ] add noWindow() for headless mode 
+* [X] should fullscreen() toggle between fullscreen and previous screen size? or take an argument to reset? or... (investigate p5/processing ways to do this)
+  * [ ] see slime's note on [canonical way to come out of fullscreen](https://github.com/love2d/love/issues/2348#issuecomment-5209544143)
+* [X] resizeCanvas() - debug. doesn't seem to correctly work.
+* [ ] error detection with useful error messages
+* [ ] cursor() has only been tested on Linux. Test that the same cursor constants are present on Mac and Windows.
+* [X] fullscreen seems currently broken. called inside L5 at wrong time or related to setup events drawing call rewrite?
+* [X] fix flickering on event handling - graphics in mousePressed(), keyTyped(), keyReleased() double draw call and cause flickering i think
+* [X] debug mouseClicked - probably needs to be added to draw after mousePressed
+* [X] move all non-user-editable globals and constants to be keys in a single global env table (to prevent collisions with user-defined variables)
+* [X] check transforms reset at correct time? see the rotating square example.
+* [X] only call setup code once
+  * [ ] in fact - fix so that you don't need a setup. the environment L5_env should be setup before - update: would be difficult to implement this to match Processing parity, requiring capturing and playing back commands, or use of modified Love and separate main.lua that calls user code inside a sketch.lua?
+  * [X] i think don't run it in love.load, only need to grab screensize from size() function out of it?
+* [x] make setup() optional so that defaults/constants are set even without a setup (L5_env, size, etc)
+  * [X] width not set if fullscreen in use or no size()
+* [X] review noise() - how important is it that L5 does not implement Value Noise, which both Processing and p5.js use? (they may move to Simplex or Perlin so maybe this is not an issue!) - update: staying with Simplex currently
+* [X] loop() doesn't seem to turn on looping again if currently stopped due to noLoop()
+* [X] save() function ignores specified filename argument to save the file under
+* [X] add createGraphics() drawing to offscreen buffer
+* [ ] Enhancement: figure out some way to allow passing in image vars instead of only image filepath for custom cursors 
+* [X] not registering backspace/delete key pressed
+* [ ] mask() doesn't currently unwrap createGraphics() buffers the way image()/texture() do. Passing a createGraphics() to mask will fail at img:getWidth(). Recheck after LOVE 12.0 due to change in Texture:replacePixels. Test and add unwrapping.
+
+## Color
+
+* [ ] background color doesn't stay persistent when switching to fullscreen() on older tested Macintosh. tested with the example/drawing-lines in fullscreen. possible solution is to save background color, then redraw after fullscreen. would require fullscreen() be used at beginning of setup() before drawing items to canvas to avoid overdrawing them when switching to fullscreen. size(displayWidth,displayHeight) doesn't have this issue.
+* [X] color_max isn't correctly taken into account
+* [X] set default fill color (black?)
+* [X] line should be stroke color
+* [X] html color names
+* [X] Hex code colors
+* [X] add [HSB](https://www.love2d.org/wiki/HSV_color) and [HSL](https://www.love2d.org/wiki/HSL_color)
+  * [X] add ability to set max value per val in table (RGBA, HSLA, HSBA)
+* [ ] using html color name should assume RGB mode despite actual global L5_env.color_mode (or other way to handle this since stored as RGB value tables, values max 255)
+* [X] colorMode should also allow setting individual max values for RGBA (or HSL/HSB) etc
+* [X] fix: noFill seems to turn off all fill going forward, overriding fill()
+* [X] tint should work when specified as 2-values: grayness,alpha
+* [X] flickering happens in specific circumstances that need to be debugged such as transparency-related 
+* [X] fix toColor() for individual args and table 
+* [ ] noSmooth() does not appear to work well? test more and improve
+* [ ] consider standardizing color 0-255 everywhere so that testing "<=1.0 = normalized" doesn't return incorrect results when color returns less than 1 for 0-255 range. Check fill(), red(), green(), blue(), alpha(), brightness(), lightness(), hue(), lerpColor()
+
+## Shapes
+
+* [X] test and fix arc to be consistent with p5 arc
+* [X] ellipseMode doesn't seem to work? 
+* [X] imageMode(): add CORNERS mode
+* [X] add custom shape creation via createShape() (processing) / beginShape() (p5.js), vertex() and endShape() (using love2d polygon - pass vertices as table?)
+* [ ] Add QUADS, QUAD_STRIP, TESS support for kind parameter in beginShape
+
+## Filter
+
+* [X] Improve blur algorithm - exponential blur, not Gaussian blur
+* [ ] filter doesn't currently apply to setup, only in draw
+* [ ] filter doesn't work correctly in draw if noLoop() is used
+* [ ] test / fix ability to switch between filters
+* [ ] review optional params for consistency with processing/p5
+  * [ ] dial in blur filter better to match p5/processing
+  * [ ] add OPAQUE filter to blur
+* [ ] received report of shader failure for BLUR, ERODE, DILATE
+
+## Typography
+
+* [X] font size (via L5_env.currentFontSize) does not seem to carry over from setup() to draw()
+* [X] specifying optional width to text() function doesn't work correctly if textAlign() is set to CENTER or RIGHT currently. text doesn't draw to screen correctly.
+* [ ] add utf-8 support to handle multi-byte UTF-8 characters (Chinese, emoji, etc.) correctly in CHAR wrap mode in text()
+* [ ] bug inside L5_internal.defaults() where in "typography" section the `CENTER = "center"` constant overwrites the previous `CENTER = "CENTER"` in the "shapes" section.
+
+## Pixels
+
+* [ ] add pixelDensity()
+* [X] add pixel array and functions for working with pixels
+* [X] fix blend modes, currently not differentiated much, likely requires implementing shaders
+* [ ] adding additional blendModes (if desired - not currently a priority) would need to be implemented with shaders: DIFFERENCE, EXCLUSION, OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN
+
+## Events
+
+* [X] error on mouseWheel() function.
+
+## Platform
+
+* [ ] add new L5 mode to Processing IDE
+* [ ] custom launcher for L5 programs?
+  * [ ] [VSCode launcher fork that packages L5?](https://marketplace.visualstudio.com/items?itemName=Menerv.love2d-launcher)
+* [X] VSCode extension for L5
+  * [X] VSCode setup instructions/starter
+* [ ] Exporter
+  * [ ] Wrapper to simplify export to Mac Application, PC executable or Linux appImage (compare to Processing's Export Application, basic GUI) - examples: [love-export](https://github.com/dmoa/love-export) (CLI, older), [love-build](https://github.com/ellraiser/love-build) (GUI built in Love, current)
+
+## Documentation
+
+* [X] Build website and reference
+  * [X] landing page
+  * [X] download
+  * [X] reference index and pages
+  * [X] tutorials
+  * [X] examples pages
+  * [X] about
+
+## Libraries
+
+* [ ] camera
+  * [X] create test with working webcam first
+* [ ] sound
+  * [X] create tests with working sound sample playback
